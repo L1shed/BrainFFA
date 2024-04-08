@@ -1,5 +1,6 @@
 package me.lished.brainffa.listener
 
+import me.lished.brainffa.injectToFFA
 import me.lished.brainffa.randomTp
 import me.lished.brainffa.respawn
 import org.bukkit.Material
@@ -36,7 +37,7 @@ class PlayerListener : Listener {
     @EventHandler
     fun onClick(e: PlayerInteractEvent) {
         if (e.item == ItemStack(Material.NETHER_STAR)) {
-            e.player.randomTp()
+            e.player.injectToFFA()
         }
     }
 }

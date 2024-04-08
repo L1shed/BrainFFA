@@ -14,6 +14,7 @@ fun respawn(player: Player) {
     player.inventory.clear()
     player.inventory.setItem(4, ItemStack(Material.NETHER_STAR))
 }
-fun Player.randomTp() {
+fun Player.injectToFFA() {
     teleport(Location(world, 0.0, 90.0, 0.0))
+    inventory.contents = arrayOf(ItemStack(Material.STONE, 29),ItemStack(Material.STONE, 29),ItemStack(Material.STONE, 29),ItemStack(Material.STONE, 29),ItemStack(Material.STONE, 29),ItemStack(Material.STONE, 29))
 }
