@@ -1,0 +1,7 @@
+name: BrainFFA
+version: "${project.version}"
+main: me.lished.brainffa.BrainFFA
+author: Lished
+api-version: 1.8
+libraries:
+  -

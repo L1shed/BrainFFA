@@ -2,20 +2,18 @@ plugins {
     kotlin("jvm") version "1.9.23"
 }
 
-group = "org.example"
+group = "me.lished"
 version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
+    compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(8)
 }
