@@ -25,9 +25,9 @@ class PlayerListener : Listener {
         victim.inventory.clear()
 
         if (victim.lastDamageCause.cause == EntityDamageEvent.DamageCause.VOID) {
-            e.deathMessage = ""
+            e.deathMessage = "kill void"
         } else if (victim.lastDamageCause.cause == EntityDamageEvent.DamageCause.ENTITY_ATTACK && victim.killer is Player) {
-            e.deathMessage = ""
+            e.deathMessage = "kill ${victim.killer}"
         } else {
             e.deathMessage = ""
         }
