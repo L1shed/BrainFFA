@@ -3,5 +3,7 @@ version: "${project.version}"
 main: fr.lyxiz.brainffa.BrainFFA
 author: Lished
 api-version: 1.8
+softdepend:
+  - HolographicDisplays
 #libraries:
 #  - org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.23
