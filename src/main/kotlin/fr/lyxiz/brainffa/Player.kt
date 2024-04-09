@@ -22,12 +22,11 @@ data class PlayerStats(
 )
 
 fun Player.respawn() {
-    playSound(player.location,Sound.ORB_PICKUP, 100f, 100f)
     teleport(Location(Bukkit.getWorld("world"), 0.0, 90.0, 0.0))
+    playSound(player.location,Sound.ORB_PICKUP, 100f, 100f)
     inventory.clear()
     inventory.setItem(4, ItemStack(Material.NETHER_STAR))
 
-    sendMessage(playerStatsMap[this].toString())
     killstreakHologram.refresh()
 }
 fun Player.injectToFFA() {

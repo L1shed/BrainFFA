@@ -7,6 +7,7 @@ import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.PlayerInteractEvent
@@ -49,13 +50,15 @@ class PlayerListener : Listener {
             e.deathMessage = ""
         }
 
-        victim.killer.health = victim.killer.maxHealth
         victim.respawn()
+        playerStatsMap.getOrPut(victim) { PlayerStats() }.deaths++
+        playerStatsMap.getOrPut(victim) { PlayerStats() }.killstreak = 0
+        victim.sendMessage(playerStatsMap.toString())
 
-        playerStatsMap[victim]!!.deaths.inc()
-        playerStatsMap[victim]!!.killstreak = 0
-        playerStatsMap[victim.killer]!!.kills.inc()
-        playerStatsMap[victim.killer]!!.killstreak.inc()
+        if (victim.killer != null) {
+            victim.killer.health = victim.killer.maxHealth
+            playerStatsMap.getOrPut(victim.killer) { PlayerStats() }.kills++
+        }
     }
 
     @EventHandler
@@ -68,11 +71,21 @@ class PlayerListener : Listener {
     @EventHandler
     fun onMove(e: PlayerMoveEvent) {
         if (e.to.y < 70) {
-            playerStatsMap.getOrPut(e.player) { PlayerStats() }.deaths.inc()
             Bukkit.broadcastMessage("kill void")
-            playerStatsMap[e.player]!!.deaths.inc()
-            playerStatsMap[e.player]!!.killstreak = 0
             e.player.respawn()
+            playerStatsMap.getOrPut(e.player) { PlayerStats() }.deaths++
+            playerStatsMap.getOrPut(e.player) { PlayerStats() }.killstreak = 0
         }
+    }
+
+    @EventHandler
+    fun onPlace(e: BlockPlaceEvent) {
+        if (e.blockPlaced.y > 100) {
+            e.isCancelled = true
+            return
+        }
+        Bukkit.getScheduler().scheduleSyncDelayedTask(BrainFFA.instance, {
+            e.blockPlaced.type = Material.AIR
+        }, 10*20)
     }
 }
