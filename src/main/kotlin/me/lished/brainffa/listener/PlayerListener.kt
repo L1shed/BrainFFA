@@ -12,8 +12,6 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.inventory.ItemStack
 
 class PlayerListener : Listener {
-//    private val playerStatsMap = mutableMapOf<Player, PlayerStats>()
-
     @EventHandler
     fun onJoin(e: PlayerJoinEvent) {
         e.player.respawn()
