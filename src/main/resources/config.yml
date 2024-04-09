@@ -1,0 +1,23 @@
+spawn:
+  ==: org.bukkit.Location
+  world: world
+  x: 0.0
+  y: 120.0
+  z: 0.0
+  pitch: 0.0
+  yaw: 0.0
+spawn_random:
+  - ==: org.bukkit.Location
+    world: world
+    x: 0.0
+    y: 120.0
+    z: 0.0
+    pitch: 0.0
+    yaw: 0.0
+  - ==: org.bukkit.Location
+    world: world
+    x: 0.0
+    y: 120.0
+    z: 0.0
+    pitch: 0.0
+    yaw: 0.0

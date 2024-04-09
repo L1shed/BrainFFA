@@ -1,13 +1,10 @@
 package fr.lyxiz.brainffa
 
 import fr.lyxiz.brainffa.listener.PlayerListener
-import fr.mrmicky.fastboard.FastBoard
 import me.filoghost.holographicdisplays.api.HolographicDisplaysAPI
-import me.filoghost.holographicdisplays.api.hologram.Hologram
-import me.filoghost.holographicdisplays.api.internal.HolographicDisplaysAPIProvider
 import org.bukkit.Bukkit
 import org.bukkit.Location
-import org.bukkit.Statistic
+import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.plugin.java.JavaPlugin
 
 class BrainFFA : JavaPlugin() {
@@ -17,6 +14,7 @@ class BrainFFA : JavaPlugin() {
 
     override fun onEnable() {
         instance = this
+        saveConfig()
         server.pluginManager.registerEvents(PlayerListener(),this)
         server.scheduler.scheduleSyncRepeatingTask(this, {
             boards.update()

@@ -1,7 +1,6 @@
 package fr.lyxiz.brainffa
 
 import fr.mrmicky.fastboard.FastBoard
-import me.filoghost.holographicdisplays.api.HolographicDisplaysAPI
 import me.filoghost.holographicdisplays.api.hologram.Hologram
 import org.bukkit.Bukkit
 import org.bukkit.Location
@@ -10,6 +9,8 @@ import org.bukkit.Sound
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
+import kotlin.random.Random
+
 
 val playerStatsMap = mutableMapOf<Player, PlayerStats>()
 var boards = mutableMapOf<Player, FastBoard>()
@@ -22,7 +23,7 @@ data class PlayerStats(
 )
 
 fun Player.respawn() {
-    teleport(Location(Bukkit.getWorld("world"), 0.0, 90.0, 0.0))
+    teleport(BrainFFA.instance.config["spawn"] as Location)
     playSound(player.location,Sound.ORB_PICKUP, 100f, 100f)
     inventory.clear()
     inventory.setItem(4, ItemStack(Material.NETHER_STAR))
@@ -31,7 +32,8 @@ fun Player.respawn() {
     killstreakHologram.refresh()
 }
 fun Player.injectToFFA() {
-    teleport(Location(Bukkit.getWorld("world"), 0.0, 90.0, 0.0))
+    val spawns = BrainFFA.instance.config.getList("spawn_random") as ArrayList<Location>
+    teleport(spawns[Random.nextInt(spawns.size)])
 
     inventory.clear()
     inventory.setItem(0, ItemStack(Material.IRON_SWORD).apply { addEnchantment(Enchantment.DAMAGE_ALL, 1) })

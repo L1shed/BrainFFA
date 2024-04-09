@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.entity.FoodLevelChangeEvent
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerJoinEvent
@@ -42,9 +43,7 @@ class PlayerListener : Listener {
 
         victim.inventory.clear()
 
-        /*if (victim.lastDamageCause.cause == EntityDamageEvent.DamageCause.VOID) {
-            e.deathMessage = "kill void"
-        } else*/ if (victim.lastDamageCause.cause == EntityDamageEvent.DamageCause.ENTITY_ATTACK && victim.killer is Player) {
+        if (victim.lastDamageCause.cause == EntityDamageEvent.DamageCause.ENTITY_ATTACK && victim.killer != null) {
             e.deathMessage = "kill ${victim.killer}"
         } else {
             e.deathMessage = ""
@@ -95,5 +94,10 @@ class PlayerListener : Listener {
         Bukkit.getScheduler().scheduleSyncDelayedTask(BrainFFA.instance, {
             e.blockPlaced.type = Material.AIR
         }, 10*20)
+    }
+
+    @EventHandler
+    fun onHunger(e: FoodLevelChangeEvent) {
+        e.isCancelled = true
     }
 }
