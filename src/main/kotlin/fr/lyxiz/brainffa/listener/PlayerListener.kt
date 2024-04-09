@@ -8,6 +8,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
+import org.bukkit.event.entity.CreatureSpawnEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.FoodLevelChangeEvent
 import org.bukkit.event.entity.PlayerDeathEvent
@@ -98,6 +99,11 @@ class PlayerListener : Listener {
 
     @EventHandler
     fun onHunger(e: FoodLevelChangeEvent) {
+        e.isCancelled = true
+    }
+
+    @EventHandler
+    fun onMobSpawn(e: CreatureSpawnEvent){
         e.isCancelled = true
     }
 }
