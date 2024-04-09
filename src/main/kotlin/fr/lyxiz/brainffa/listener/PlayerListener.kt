@@ -70,6 +70,8 @@ class PlayerListener : Listener {
         if (e.to.y < 70) {
             playerStatsMap.getOrPut(e.player) { PlayerStats() }.deaths.inc()
             Bukkit.broadcastMessage("kill void")
+            playerStatsMap[e.player]!!.deaths.inc()
+            playerStatsMap[e.player]!!.killstreak = 0
             e.player.respawn()
         }
     }
