@@ -1,6 +1,9 @@
-package me.lished.brainffa.listener
+package fr.lyxiz.brainffa.listener
 
-import me.lished.brainffa.*
+import fr.lyxiz.brainffa.PlayerStats
+import fr.lyxiz.brainffa.injectToFFA
+import fr.lyxiz.brainffa.playerStatsMap
+import fr.lyxiz.brainffa.respawn
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -31,10 +34,10 @@ class PlayerListener : Listener {
             e.deathMessage = ""
         }
 
-        playerStatsMap.getOrPut(victim) {PlayerStats()}.deaths.inc()
-        playerStatsMap.getOrPut(victim) {PlayerStats()}.killstreak = 0
-        playerStatsMap.getOrPut(victim.killer) {PlayerStats()}.kills.inc()
-        playerStatsMap.getOrPut(victim.killer) {PlayerStats()}.killstreak.inc()
+        playerStatsMap.getOrPut(victim) { PlayerStats() }.deaths.inc()
+        playerStatsMap.getOrPut(victim) { PlayerStats() }.killstreak = 0
+        playerStatsMap.getOrPut(victim.killer) { PlayerStats() }.kills.inc()
+        playerStatsMap.getOrPut(victim.killer) { PlayerStats() }.killstreak.inc()
 
         victim.respawn()
     }

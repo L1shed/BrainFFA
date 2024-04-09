@@ -1,7 +1,7 @@
 name: BrainFFA
 version: "${project.version}"
-main: me.lished.brainffa.BrainFFA
+main: fr.lyxiz.brainffa.BrainFFA
 author: Lished
 api-version: 1.8
 #libraries:
-#  -
+#  - org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.23

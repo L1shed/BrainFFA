@@ -1,4 +1,4 @@
-package me.lished.brainffa
+package fr.lyxiz.brainffa
 
 import org.bukkit.Location
 import org.bukkit.Material
