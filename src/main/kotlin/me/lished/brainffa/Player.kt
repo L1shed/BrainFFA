@@ -6,7 +6,7 @@ import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
-object Player {
+object BrainPlayer {
 }
 fun respawn(player: Player) {
     player.playSound(player.location,Sound.ORB_PICKUP, 100f, 100f)
