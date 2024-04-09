@@ -18,7 +18,7 @@ class BrainFFA : JavaPlugin() {
     override fun onEnable() {
         instance = this
         server.pluginManager.registerEvents(PlayerListener(),this)
-        val taskId = server.scheduler.scheduleSyncRepeatingTask(this, {
+        server.scheduler.scheduleSyncRepeatingTask(this, {
             for (board in boards.values) {
                 board.update()
             }
@@ -29,7 +29,6 @@ class BrainFFA : JavaPlugin() {
     }
 
     private fun FastBoard.update() {
-        val playerStats = playerStatsMap.getOrPut(player) { PlayerStats() }
         updateLines(
             "",
             "Kills: " + (playerStatsMap[player]?.kills ?: 0),
