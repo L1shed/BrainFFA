@@ -6,10 +6,6 @@ import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
-class BrainPlayer(player: Player) {
-
-}
-
 val playerStatsMap = mutableMapOf<Player, PlayerStats>()
 
 data class PlayerStats(
