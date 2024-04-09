@@ -18,23 +18,7 @@ class BrainFFA : JavaPlugin() {
     override fun onEnable() {
         instance = this
         server.pluginManager.registerEvents(PlayerListener(),this)
-        server.scheduler.scheduleSyncRepeatingTask(this, {
-            for (board in boards.values) {
-                board.update()
-            }
-        }, 0, 20)
-
         killstreakHologram = HolographicDisplaysAPI.get(this).createHologram(Location(Bukkit.getWorld("world"), 0.0, 85.0, 0.0))
         killstreakHologram.refresh()
-    }
-
-    private fun FastBoard.update() {
-        updateLines(
-            "",
-            "Kills: " + (playerStatsMap[player]?.kills ?: 0),
-            "Morts: " + (playerStatsMap[player]?.deaths ?: 0),
-            "Killstreak: " + (playerStatsMap[player]?.killstreak ?: 0),
-            ""
-        )
     }
 }

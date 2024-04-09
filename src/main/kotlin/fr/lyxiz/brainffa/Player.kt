@@ -27,6 +27,7 @@ fun Player.respawn() {
     inventory.clear()
     inventory.setItem(4, ItemStack(Material.NETHER_STAR))
 
+    boards.update()
     killstreakHologram.refresh()
 }
 fun Player.injectToFFA() {
@@ -53,5 +54,17 @@ fun Hologram.refresh() {
         val stats = entry.value
         killstreakHologram.lines.appendText("- Top 10 Killstreak -")
         killstreakHologram.lines.appendText("${index + 1}. ${player.name} - ${stats.killstreak}")
+    }
+}
+
+fun MutableMap<Player, FastBoard>.update() {
+    for (board in this.values) {
+        board.updateLines(
+            "",
+            "Kills: " + (playerStatsMap[board.player]?.kills ?: 0),
+            "Morts: " + (playerStatsMap[board.player]?.deaths ?: 0),
+            "Killstreak: " + (playerStatsMap[board.player]?.killstreak ?: 0),
+            ""
+        )
     }
 }
