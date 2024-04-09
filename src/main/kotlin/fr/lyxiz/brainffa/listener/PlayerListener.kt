@@ -50,6 +50,7 @@ class PlayerListener : Listener {
             e.deathMessage = ""
         }
 
+        e.keepInventory = true
         victim.respawn()
         playerStatsMap.getOrPut(victim) { PlayerStats() }.deaths++
         playerStatsMap.getOrPut(victim) { PlayerStats() }.killstreak = 0
@@ -75,6 +76,13 @@ class PlayerListener : Listener {
             e.player.respawn()
             playerStatsMap.getOrPut(e.player) { PlayerStats() }.deaths++
             playerStatsMap.getOrPut(e.player) { PlayerStats() }.killstreak = 0
+        }
+    }
+
+    @EventHandler
+    fun onDamage(event: EntityDamageEvent) {
+        if (event.cause == EntityDamageEvent.DamageCause.FALL) {
+            event.isCancelled = true
         }
     }
 
