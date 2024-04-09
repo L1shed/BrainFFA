@@ -16,7 +16,7 @@ class PlayerListener : Listener {
 
     @EventHandler
     fun onJoin(e: PlayerJoinEvent) {
-        respawn(e.player)
+        e.player.respawn()
     }
 
     @EventHandler
@@ -38,6 +38,7 @@ class PlayerListener : Listener {
         playerStatsMap.getOrPut(victim.killer) {PlayerStats()}.kills.inc()
         playerStatsMap.getOrPut(victim.killer) {PlayerStats()}.killstreak.inc()
 
+        victim.respawn()
     }
 
     @EventHandler
