@@ -27,6 +27,7 @@ fun Player.respawn() {
     inventory.clear()
     inventory.setItem(4, ItemStack(Material.NETHER_STAR))
 
+    sendMessage(playerStatsMap[this].toString())
     killstreakHologram.refresh()
 }
 fun Player.injectToFFA() {

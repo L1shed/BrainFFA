@@ -15,7 +15,7 @@ class BrainFFA : JavaPlugin() {
         server.pluginManager.registerEvents(PlayerListener(),this)
         server.scheduler.runTaskTimer(this, {
             for (board in boards.values) {
-                updateBoard(board)
+                board.update()
             }
         }, 0, 20)
 
@@ -23,9 +23,9 @@ class BrainFFA : JavaPlugin() {
         killstreakHologram.refresh()
     }
 
-    private fun updateBoard(board: FastBoard) {
-        val playerStats = playerStatsMap.getOrPut(board.player) { PlayerStats() }
-        board.updateLines(
+    private fun FastBoard.update() {
+        val playerStats = playerStatsMap.getOrPut(player) { PlayerStats() }
+        updateLines(
             "",
             "Kills: " + playerStats.kills,
             "Morts: " + playerStats.deaths,

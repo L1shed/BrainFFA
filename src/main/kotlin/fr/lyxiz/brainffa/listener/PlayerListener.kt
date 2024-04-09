@@ -49,13 +49,13 @@ class PlayerListener : Listener {
             e.deathMessage = ""
         }
 
-        playerStatsMap.getOrPut(victim) { PlayerStats() }.deaths.inc()
-        playerStatsMap.getOrPut(victim) { PlayerStats() }.killstreak = 0
-        playerStatsMap.getOrPut(victim.killer) { PlayerStats() }.kills.inc()
-        playerStatsMap.getOrPut(victim.killer) { PlayerStats() }.killstreak.inc()
-
         victim.killer.health = victim.killer.maxHealth
         victim.respawn()
+
+        playerStatsMap[victim]!!.deaths.inc()
+        playerStatsMap[victim]!!.killstreak = 0
+        playerStatsMap[victim.killer]!!.kills.inc()
+        playerStatsMap[victim.killer]!!.killstreak.inc()
     }
 
     @EventHandler
