@@ -1,5 +1,6 @@
 package fr.lyxiz.brainffa
 
+import fr.mrmicky.fastboard.FastBoard
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Sound
@@ -7,6 +8,7 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 val playerStatsMap = mutableMapOf<Player, PlayerStats>()
+var boards = mutableMapOf<Player, FastBoard>()
 
 data class PlayerStats(
     var kills: Int = 0,

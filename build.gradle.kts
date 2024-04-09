@@ -1,5 +1,7 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
-//    id("java")
+    id("java")
     kotlin("jvm") version "1.9.23"
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
@@ -23,9 +25,8 @@ kotlin {
     jvmToolchain(8)
 }
 
-shadowJar {
-    // Replace 'com.yourpackage' with the package of your plugin
-    relocate 'fr.mrmicky.fastboard', 'com.yourpackage.fastboard'
+tasks.named<ShadowJar>("shadowJar") {
+    relocate("fr.mrmicky.fastboard", "fr.lyxiz.fastboard")
 }
 
 tasks.withType<Jar> {

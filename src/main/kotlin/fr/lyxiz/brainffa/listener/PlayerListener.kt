@@ -1,9 +1,7 @@
 package fr.lyxiz.brainffa.listener
 
-import fr.lyxiz.brainffa.PlayerStats
-import fr.lyxiz.brainffa.injectToFFA
-import fr.lyxiz.brainffa.playerStatsMap
-import fr.lyxiz.brainffa.respawn
+import fr.lyxiz.brainffa.*
+import fr.mrmicky.fastboard.FastBoard
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -12,12 +10,27 @@ import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerJoinEvent
+import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.ItemStack
+
 
 class PlayerListener : Listener {
     @EventHandler
     fun onJoin(e: PlayerJoinEvent) {
-        e.player.respawn()
+        val player = e.player
+
+        val board = FastBoard(player)
+        board.updateTitle("§cFastBoard")
+        boards.put(player, board)
+
+        player.respawn()
+    }
+
+    @EventHandler
+    fun onQuit(e: PlayerQuitEvent) {
+        val player = e.player
+
+        boards.remove(player)?.delete()
     }
 
     @EventHandler
