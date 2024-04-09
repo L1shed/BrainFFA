@@ -1,8 +1,6 @@
 package me.lished.brainffa.listener
 
-import me.lished.brainffa.injectToFFA
-import me.lished.brainffa.randomTp
-import me.lished.brainffa.respawn
+import me.lished.brainffa.*
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -14,6 +12,8 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.inventory.ItemStack
 
 class PlayerListener : Listener {
+//    private val playerStatsMap = mutableMapOf<Player, PlayerStats>()
+
     @EventHandler
     fun onJoin(e: PlayerJoinEvent) {
         respawn(e.player)
@@ -32,6 +32,12 @@ class PlayerListener : Listener {
         } else {
             e.deathMessage = ""
         }
+
+        playerStatsMap.getOrPut(victim) {PlayerStats()}.deaths.inc()
+        playerStatsMap.getOrPut(victim) {PlayerStats()}.killstreak = 0
+        playerStatsMap.getOrPut(victim.killer) {PlayerStats()}.kills.inc()
+        playerStatsMap.getOrPut(victim.killer) {PlayerStats()}.killstreak.inc()
+
     }
 
     @EventHandler

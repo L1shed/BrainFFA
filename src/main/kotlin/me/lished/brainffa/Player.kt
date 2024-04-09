@@ -6,8 +6,18 @@ import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
-object BrainPlayer {
+class BrainPlayer(player: Player) {
+
 }
+
+val playerStatsMap = mutableMapOf<Player, PlayerStats>()
+
+data class PlayerStats(
+    var kills: Int = 0,
+    var deaths: Int = 0,
+    var killstreak: Int = 0
+)
+
 fun respawn(player: Player) {
     player.playSound(player.location,Sound.ORB_PICKUP, 100f, 100f)
     player.teleport(Location(player.world, 0.0, 90.0, 0.0))
