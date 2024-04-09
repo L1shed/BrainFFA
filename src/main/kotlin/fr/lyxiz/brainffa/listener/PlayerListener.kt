@@ -54,6 +54,7 @@ class PlayerListener : Listener {
         playerStatsMap.getOrPut(victim.killer) { PlayerStats() }.kills.inc()
         playerStatsMap.getOrPut(victim.killer) { PlayerStats() }.killstreak.inc()
 
+        victim.killer.health = victim.killer.maxHealth
         victim.respawn()
     }
 
