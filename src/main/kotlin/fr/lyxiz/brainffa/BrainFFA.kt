@@ -19,16 +19,8 @@ class BrainFFA : JavaPlugin() {
             }
         }, 0, 20)
 
-        val hologram = HolographicDisplaysAPI.get(this).createHologram(Location(Bukkit.getWorld("world"), 0.0, 85.0, 0.0))
-        val topPlayers = playerStatsMap.entries.sortedByDescending { it.value.killstreak }.take(10)
-
-        topPlayers.forEachIndexed { index, entry ->
-            val player = entry.key
-            val stats = entry.value
-            hologram.lines.appendText("- Top 10 Killstreak -")
-            hologram.lines.appendText("${index + 1}. ${player.name} - ${stats.killstreak}")
-        }
-        hologram.delete()
+        killstreakHologram = HolographicDisplaysAPI.get(this).createHologram(Location(Bukkit.getWorld("world"), 0.0, 85.0, 0.0))
+        killstreakHologram.refresh()
     }
 
     private fun updateBoard(board: FastBoard) {
