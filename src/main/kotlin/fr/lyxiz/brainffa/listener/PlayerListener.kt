@@ -59,6 +59,10 @@ class PlayerListener : Listener {
         if (victim.killer != null) {
             victim.killer.health = victim.killer.maxHealth
             playerStatsMap.getOrPut(victim.killer) { PlayerStats() }.kills++
+            playerStatsMap.getOrPut(victim.killer) { PlayerStats() }.killstreak++
+            if(playerStatsMap.getOrPut(victim.killer) { PlayerStats() }.killstreak % 5 == 0) {
+                e.deathMessage = "kill ${victim.killer} qui a ${playerStatsMap.getOrPut(victim.killer) { PlayerStats() }.killstreak} de killstreak!"
+            }
         }
     }
 
